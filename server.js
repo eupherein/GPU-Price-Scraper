@@ -3,7 +3,7 @@
 
 // Dependencies
 var express = require("express");
-var mongojs = require("mongojs");
+var mongoose = require("mongoose");
 var router = require("./controllers/controller.js");
 
 // Initialize Express
@@ -14,13 +14,15 @@ var app = express();
 var databaseUrl = "newegg";
 var collections = ["products"];
 
-// Use mongojs to hook the database to the db variable
-var db = mongojs(databaseUrl, collections);
+// Use mongoose to hook the database to the db variable
+// var db = mongoose(databaseUrl, collections);
+
+
 
 // This makes sure that any errors are logged if mongodb runs into an issue
-db.on("error", function(error) {
-  console.log("Database Error:", error);
-});
+// db.on("error", function(error) {
+//  console.log("Database Error:", error);
+// });
 
 // TODO: Implement the remaining two routes
 
