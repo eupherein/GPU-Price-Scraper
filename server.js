@@ -4,6 +4,7 @@
 // Dependencies
 var express = require("express");
 var mongojs = require("mongojs");
+var router = require("./controllers/controller.js");
 
 // Initialize Express
 var app = express();
@@ -21,27 +22,9 @@ db.on("error", function(error) {
   console.log("Database Error:", error);
 });
 
-// 1: Root: Displays a simple "Hello World" message (no mongo required)
-app.get("/", function(req, res) {
-  res.send("Hello world");
-});
-
-// 2: All: Send JSON response with all animals
-app.get("/all", function(req, res) {
-  // Query: In our database, go to the animals collection, then "find" everything
-  db.animals.find({}, function(err, data) {
-    // Log any errors if the server encounters one
-    if (err) {
-      console.log(err);
-    }
-    else {
-      // Otherwise, send the result of this query to the browser
-      res.json(data);
-    }
-  });
-});
-
 // TODO: Implement the remaining two routes
+
+app.use('/', router);
 
 // 3: Name: Send JSON response sorted by name in ascending order, e.g. GET "/name"
 
