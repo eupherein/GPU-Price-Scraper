@@ -1,11 +1,14 @@
-var Schema = mongoose.Schema,
+var mongoose = require("mongoose");
+var Schema = mongoose.Schema;
+
     ObjectId = Schema.ObjectId;
  
-var Product = new Schema({
-    author    : ObjectId,
-    title     : String,
-    body      : String,
-    price      : Price
+var productSchema = new Schema({
+    gpu    : ObjectId,
+    name     : String,
+    price      : String,
 });
 
-module.exports = Product;
+var product = mongoose.model('product', productSchema);
+
+module.exports = product;

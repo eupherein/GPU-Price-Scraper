@@ -2,8 +2,8 @@ var axios = require("axios");
 var cheerio = require("cheerio");
 
 //scrape newegg for nvidia cards 
-var scrape = function () {
-    return axios.get("https://www.newegg.com/Product/ProductList.aspx?Submit=ENE&DEPA=0&Order=BESTMATCH&Description=1080ti&N=-1&isNodeId=1").then(function (res) {
+var scrape1080ti = function () {
+    return axios.get("https://www.newegg.com/Product/ProductList.aspx?Submit=ENE&DEPA=0&Order=BESTMATCH&Description=1080ti&ignorear=0&N=-1&isNodeId=1").then(function (res) {
 
         //set $ to cheerio shorthand
         var $ = cheerio.load(res.data);
@@ -19,48 +19,75 @@ var scrape = function () {
             var price = $(element).parent().find("li.price-current").find("strong").text();
 
             //push gpus to array
-            results.push({
+            gpus.push({
                 title: title,
                 link: link,
                 price: price
-
+                
             });
-
+            console.log(gpus);
         });
         return gpus;
     });
 };
+scrape1080ti();
 
+var scrape1080 = function () {
+    return axios.get("https://www.newegg.com/Product/ProductList.aspx?Submit=ENE&DEPA=0&Order=BESTMATCH&Description=1080&ignorear=0&N=-1&isNodeId=1").then(function (res) {
 
-// //Make a request call to grab the HTML body from the site of your choice
-// ("https://www.newegg.com/Product/ProductList.aspx?Submit=ENE&DEPA=0&Order=BESTMATCH&Description=1080ti&N=-1&isNodeId=1", function (error, response, html) {
+        //set $ to cheerio shorthand
+        var $ = cheerio.load(res.data);
 
-//     // Load the HTML into cheerio and save it to a variable
-//     // '$' becomes a shorthand for cheerio's selector commands, much like jQuery's '$'
-//     var $ = cheerio.load(html);
+        //make array to store search results
+        var gpus = [];
 
-//     // An empty array to save the data that we'll scrape
-//     var results = [];
+        //sort thru search results
+        $("a.item-title").each(function (i, element) {
 
-//     // Select each element in the HTML body from which you want information.
-//     // NOTE: Cheerio selectors function similarly to jQuery's selectors,
-//     // but be sure to visit the package's npm page to see how it works
-//     $("a.item-title").each(function (i, element) {
+            var link = $(element).attr("href");
+            var title = $(element).text();
+            var price = $(element).parent().find("li.price-current").find("strong").text();
 
-//         var link = $(element).attr("href");
-//         var title = $(element).text();
-//         var price = $(element).parent().find("li.price-current").find("strong").text();
+            gpus.push({
+                title: title,
+                link: link,
+                price: price
+                
+            });
+            console.log(gpus);
+        });
+        return gpus;
+    });
+};
+scrape1080();
 
-//         // Save these results in an object that we'll push into the results array we defined earlier
-//         results.push({
-//             title: title,
-//             link: link,
-//             price: price
-//         });
-//     });
+var scrape1070ti = function () {
+    return axios.get("https://www.newegg.com/Product/ProductList.aspx?Submit=ENE&DEPA=0&Order=BESTMATCH&Description=1070ti&ignorear=0&N=-1&isNodeId=1").then(function (res) {
 
-//     // Log the results once you've looped through each of the elements found with cheerio
-//     console.log(results);
-// });
+        //set $ to cheerio shorthand
+        var $ = cheerio.load(res.data);
 
-module.exports = scrape;
+        //make array to store search results
+        var gpus = [];
+
+        //sort thru search results
+        $("a.item-title").each(function (i, element) {
+
+            var link = $(element).attr("href");
+            var title = $(element).text();
+            var price = $(element).parent().find("li.price-current").find("strong").text();
+
+            gpus.push({
+                title: title,
+                link: link,
+                price: price
+                
+            });
+            console.log(gpus);
+        });
+        return gpus;
+    });
+};
+scrape1070ti();
+
+module.exports = (scrape1080ti, scrape1080);
