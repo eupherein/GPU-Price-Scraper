@@ -1,7 +1,4 @@
-// See near the bottom of this file for your TODO assignments.
-// Good luck!
-
-// Dependencies
+// Dependencies                    
 var express = require("express");
 var mongoose = require("mongoose");
 var router = require("./controllers/controller.js");
