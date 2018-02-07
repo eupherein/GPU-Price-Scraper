@@ -29,7 +29,8 @@ var collections = ["products"];
 // var app = express();
 // TODO: Implement the remaining two routes
 
-router.use(express.static(__dirname + '/public'));
+//-------
+//router.use(express.static(__dirname + '/public'));
 router.use('/', router);
 
 

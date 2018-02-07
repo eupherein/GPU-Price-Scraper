@@ -19,7 +19,7 @@ app.get("/", function(req, res) {
     res.send("Hello world");
   });
 
-mongoose.connect("mongodb://localhost/gpuscraper");
+//mongoose.connect("mongodb://localhost/gpuscraper");
 
 // Set the app to listen on port 3000
 app.listen(8080, function() {
