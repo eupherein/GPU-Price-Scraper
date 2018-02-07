@@ -18,8 +18,8 @@ var scrape1080ti = function () {
             //make array to store search results
             var gpus = [];
 
-            var link = $(element).attr("href");
             var title = $(element).text();
+            var link = $(element).attr("href");
             var price = $(element).parent().find("li.price-current").find("strong").text();
 
             //push gpus to array

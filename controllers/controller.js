@@ -17,6 +17,13 @@ var collections = ["products"];
 // Use mongoose to hook the database to the db variable
 // var db = mongoose(databaseUrl, collections);
 
+//=======================================================|
+//=     Load main page      =============================|
+//=======================================================|
+router.get('/', function (req, res) {
+    res.render('index.ejs'); // load the index.ejs file
+});
+
 //require models
 // var db = require("./models");
 
@@ -34,20 +41,19 @@ var collections = ["products"];
 router.use('/', router);
 
 
-  
-  // 2: All: Send JSON response with all animals
-  router.get("/all", function(req, res) {
+
+// 2: All: Send JSON response with all animals
+router.get("/all", function (req, res) {
     // Query: In our database, go to the animals collection, then "find" everything
-    db.animals.find({}, function(err, data) {
-      // Log any errors if the server encounters one
-      if (err) {
-        console.log(err);
-      }
-      else {
-        // Otherwise, send the result of this query to the browser
-        res.json(data);
-      }
+    db.animals.find({}, function (err, data) {
+        // Log any errors if the server encounters one
+        if (err) {
+            console.log(err);
+        } else {
+            // Otherwise, send the result of this query to the browser
+            res.json(data);
+        }
     });
-  });
+});
 
 module.exports = router;
