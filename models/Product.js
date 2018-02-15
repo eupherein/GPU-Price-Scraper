@@ -1,14 +1,32 @@
 var mongoose = require("mongoose");
+
+// require mongoose 
 var Schema = mongoose.Schema;
 
-    ObjectId = Schema.ObjectId;
- 
+
 var productSchema = new Schema({
-    gpu    : ObjectId,
-    name     : String,
-    price      : String,
+    name: {
+        type: String,
+        required: true,
+        unique: {
+            index: {
+                unique: true
+            }
+        }
+    },
+    // price, a string, must be entered
+    price: {
+        type: String,
+        required: true
+    },
+    // url, a string, must be entered
+    url: {
+        type: String,
+        required: true
+    }
 });
 
-var product = mongoose.model('product', productSchema);
+// create product model using productSchema
+var Product = mongoose.model('product', productSchema);
 
-module.exports = product;
+module.exports = Product;
