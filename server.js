@@ -19,6 +19,9 @@ app.use(express.static("public"));
 //scraper script 
 // var scrape = require("./scripts/scrape.js");
 
+
+// Require our routes
+var routes = require("./routes");
 // all requests go through route middleware
 app.use(routes);
 
