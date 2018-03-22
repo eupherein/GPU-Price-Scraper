@@ -2,10 +2,10 @@
 var express = require("express");
 var exphbs = require("express-handlebars");
 var mongoose = require("mongoose");
-var logger = require("morgan");
+// var logger = require("morgan");
 var axios = require("axios");
-var cheerio = require("cheerio");
-var parser = require("body-parser");
+// var cheerio = require("cheerio");
+var bodyParser = require("body-parser");
 
 //set port
 var PORT = process.env.PORT || 8080;
@@ -25,21 +25,23 @@ var routes = require("./routes");
 // all requests go through route middleware
 app.use(routes);
 
-
+// Use bodyParser in our app
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+-
 //connect handlebars 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set('view engine', 'handlebars');
 
 
-// If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
+//If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/Products";
 
-// Set mongoose to leverage built in JavaScript ES6 Promises
+
+//Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI, {
-  useMongoClient: true
-});
+mongoose.connect(MONGODB_URI);
 
 // Set the app to listen on port 3000
 app.listen(8080, function() {

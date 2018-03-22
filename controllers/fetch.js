@@ -4,7 +4,7 @@ var db = require("../models");
 var scrape = require("../scripts/scrape");
 
 module.exports = {
-  scrapeGPUs: function(req, res) {
+  scrapeProducts: function(req, res) {
     // scrape the NYT
     return scrape()
       .then(function(gpus) {
